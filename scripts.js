@@ -76,9 +76,28 @@ async function openUpContact(){
 
   
 function handleResults(contacts) {
-    var names = [''];
+    var names = [];
     contacts.forEach((contact) => {
         names.push(contact.name)
     }
     )
+    names.forEach((name)=>{
+        addCard(name);
+    })
+    
+}
+function addCard(contact){
+    var div = document.createElement('div');
+    div.className = "friendCard";
+    var img = document.createElement('img');
+    img.class = "smallFace";
+    img.src = "images/Man.png"
+    var div2 = document.createElement('div');
+    div2.class = "talkToText";
+    var h2 = document.createElement('h2');
+    h2.innerHTML="Talk to "+contact;
+    div2.appendChild(h2);
+    div.appendChild(img);
+    div.appendChild(div2);
+    document.getElementById("cardList").appendChild(div);
 }
