@@ -1,0 +1,56 @@
+body {
+    background: linear-gradient(#fbc2eb, #a6c1ee) no-repeat;
+    min-height: 100vh;
+    font-family: Raleway, sans-serif;
+    color: rgb(66,66,66);
+}
+
+h1 {
+    font-size: 13vw;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 3vw;
+}
+a{
+    color: rgb(66,66,66);
+}
+.friendCard {
+    margin-top: 5vw;
+    width: 80vw;
+    margin-left: 10vw;
+    min-height: 30vw;
+    border-radius: 2vw;
+    background-color: white;
+}
+
+
+.smallFace {
+    height: 20vw;
+    margin-left: 5vw;
+    margin-top: 5vw;
+    float: left;
+}
+
+h2 {
+    font-size: 7vw;
+    margin: 0%;
+    position: relative;
+    max-width: 48vw;
+    overflow-wrap: break-word;
+    /* left: -5vw; */
+}
+
+.talkToText {
+    width: 50vw;
+    float:right;
+    margin-top: 3vw;
+    margin-left: 5vw;
+    /* height: 30vw; */
+}
+#personBox{
+    width: 50vw;
+    margin-left: 25%;
+    background-color: white;
+    border-radius: 20px 20px 20px;
+}
