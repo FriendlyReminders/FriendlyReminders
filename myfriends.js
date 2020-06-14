@@ -140,8 +140,12 @@ function handleResults(contacts) {
     
 }
 function addCard(contact){
+    var a = document.createElement('a');
+    a.href = "person.html/"+contact;
+    document.getElementById("cardList").appendChild(a);
+
     var div = document.createElement('div');
-    document.getElementById("cardList").appendChild(div);
+    a.appendChild(div);
 
     div.className = "friendCard";
     var img = document.createElement('img');
