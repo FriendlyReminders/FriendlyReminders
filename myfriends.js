@@ -17,20 +17,30 @@ var request = indexedDB.open("MyTestDatabase");
 request.onerror = function(event) {
   console.log("Why didn't you allow my web app to use IndexedDB?!");
 };
-request.onsuccess = function(event) {
-  db = event.target.result;
-  console.log(db);
-  var transaction = db.transaction("name","readwrite").objectStore("name");
+request.onsuccess = async function(event) {
+    db = event.target.result;
+    console.log(db);
+    
+    var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+        var person = {
+            name:"james",tel:"5",contactNumber:0,personNumber:0,contactDate:"never"
+        }
+        customerObjectStore.add(person);
+        addCard(person);
+     
+    var transaction = db.transaction("name").objectStore("name");
+
     transaction.openCursor().onsuccess = function(event) {
-     var cursor = event.target.result;
-     if (cursor) {
-         addCard(cursor);
-         cursor.continue();
-     }
-     else {
-         window.alert("No more entries!");
-     }
-     };
+    var cursor = event.target.result;
+    if (cursor) {
+        console.log("Name for SSN " + cursor.key + " is " + cursor.value.name);
+        addCard(cursor.value);
+        cursor.continue();
+    }
+    else {
+        console.log("No more entries!");
+    }
+    };
 };
 request.onupgradeneeded = function(event) { 
     // Save the IDBDatabase interface 
@@ -39,16 +49,18 @@ request.onupgradeneeded = function(event) {
     // Create an objectStore for this db
     var objectStore = db.createObjectStore("name",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
+        console.log("created object store");
+    };
+    var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    objectStore.transaction.oncomplete = function(event) {
+        console.log("creation is complete");
     };
     
 
 };
 
 function reRender(){
-    console.log("I'm trying something");
-    
 
-     console.log("I did it? Maybe?");
 }
 function urlB64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - base64String.length % 4) % 4);

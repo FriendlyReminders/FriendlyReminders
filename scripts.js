@@ -41,51 +41,83 @@ navigator.serviceWorker && navigator.serviceWorker.ready.then(function(serviceWo
       });
   });
 
-//   document.body.onkeyup = function(e){
-//     if(e.key === 'Spacebar'){
-//         console.log("hi");
-//     const title = 'Push Codelab';
-//   const options = {
-//     body: 'Yay it works.',
-//     icon: 'images/icon.png',
-//     badge: 'images/badge.png'
-//   };
-//   self.registration.showNotification(title, options);
-//     }
-// }
-  
-
-
 const supported = ('contacts' in navigator && 'ContactsManager' in window);
 
 
-async function openUpContact(){
-    console.log("test");
-    if(supported){
-        const props = ['name'];
-        const opts = {multiple: true};
-        try {
-        const contacts = await navigator.contacts.select(props, opts);
-        handleResults(contacts);
-        } catch (ex) {
-        // Handle any errors here.
-            window.alert(ex);
+if (!('indexedDB' in window)) {
+    console.log('This browser doesn\'t support IndexedDB');
+}else{
+    console.log('This browser should support IndexedDB')
+}
+var db2;
+var request = indexedDB.open("MyTestDatabase");
+request.onerror = function(event) {
+  console.log("Why didn't you allow my web app to use IndexedDB?!");
+};
+
+request.onsuccess = async function(event) {
+    db2 = event.target.result;
+    console.log(db2);
+
+
+    var sameDate = false;
+    var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
+    var d = new Date();
+    transaction.openCursor().onsuccess = function(event) {
+        var cursor = event.target.result;
+        if (cursor) {
+            if(d.getFullYear()==cursor.value.year){
+                console.log("Years match");
+                if(d.getMonth()==cursor.value.month){
+                    console.log("Months match");
+                    if(d.getDay()==cursor.value.day){
+                        console.log("Days match");
+                        sameDate = true;
+                    }
+                }
+            }
+            console.log("Year " + cursor.value.year+" Month "+cursor.value.month + " Day " + cursor.value.day);
+            cursor.continue();
+        }
+        else {
+            console.log("No more entries!");
         }
     }
-}
-
-  
-function handleResults(contacts) {
-    var names = [];
-    contacts.forEach((contact) => {
-        names.push(contact.name)
+    if(!sameDate){
+        var array = customerObjectStore.getAll();
+        if(array.length>0){
+            var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
+            var date = {
+                year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
+            }
+            customerObjectStore.add(date);
+            addCard(array[Math.floor(Math.random()*array.length)])
+        }
+        
     }
-    )
-    names.forEach((name)=>{
-        addCard(name);
-    })
+
+};
+
+request.onupgradeneeded = function(event) { 
+    // Save the Idb2Database interface 
+    db2 = event.target.result;
+    console.log("upgradeneeded");
+    // Create an objectStore for this db2
+    var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    objectStore.transaction.oncomplete = function(event) {
+        console.log("creation is complete");
+    };
+    var objectStore2 = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    objectStore.transaction.oncomplete = function(event) {
+        console.log("creation is complete");
+    };
     
-}
+
+};
+
+
+
+
 
 function addCard(contact){
     var div = document.createElement('div');
