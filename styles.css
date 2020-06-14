@@ -4,6 +4,7 @@ body {
     min-height: 100vh;
     font-family: Raleway, sans-serif;
     color: rgb(66,66,66);
+    margin: 0;
 }
 
 h1 {
@@ -136,13 +137,14 @@ h3 {
 }
 
 #contactPickerButton {
-    position: absolute;
+    position: fixed;
     bottom: 25vw;
     right: 10vw;
     border-radius: 2vw;
     background-color: white;
     padding: 0;
     margin: 0;
+    border: none;
 }
 
 #contactPickerButtonImg {
@@ -153,7 +155,7 @@ h3 {
 #footerDiv {
     height: 15vw;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     background-color: white;
