@@ -114,6 +114,7 @@ async function openUpContact(){
         handleResults(contacts);
         } catch (ex) {
         // Handle any errors here.
+        window.alert("wait what?");
             window.alert(ex);
         }
     }
