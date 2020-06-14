@@ -6,7 +6,7 @@ navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(func
 });
 
 
-//this is all for indexedDB
+
 if (!('indexedDB' in window)) {
     console.log('This browser doesn\'t support IndexedDB');
 }else{
@@ -27,24 +27,11 @@ request.onupgradeneeded = function(event) {
     db = event.target.result;
     console.log("upgradeneeded");
     // Create an objectStore for this db
-    var objectStore = db.createObjectStore("name",{keyPath: "names"});
+    var objectStore = db.createObjectStore("name",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
-        // Store values in the newly created objectStore.
-        var customerObjectStore = db.transaction("customers", "readwrite").objectStore("customers");
-        customerData.forEach(function(customer) {
-          customerObjectStore.add("test");
-          console.log("test");
-        });
     };
 
 };
-console.log(db);
-function setUpIndexDB(){
-    
-    
-    
-}
-
 
 
 function urlB64ToUint8Array(base64String) {
@@ -104,13 +91,21 @@ function dosomething(){
 }
 
 async function openUpContact(){
-    console.log("test");
-    objectStore.add("test");
+
+
+    var objectStore = db.transaction("name").objectStore("name");
+
+    objectStore.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+        window.alert("Key " + cursor.key + " Value: " + cursor.value);
+        cursor.continue();
+    }
+    else {
+        window.alert("No more entries!");
+    }
+    };
     
-    // var transaction = database.transaction("name", "readwrite");
-    // var names = transaction.objectStore("name")
-    // names.add("test please work");
-    // console.log(transaction.complete);
     if(supported){
         const props = ['name'];
         const opts = {multiple: true};
@@ -132,17 +127,9 @@ function handleResults(contacts) {
     }
     )
     names.forEach((name)=>{
-        var transaction = db.transaction("name","readwrite");
-        var objectStore = transaction.objectStore("name");
-        objectStore.add("name");
-        
-        transaction.oncomplete = function(event) {
-            console.log("All done!");
-        };
-        
-        transaction.onerror = function(event) {
-            // Don't forget to handle errors!
-        };
+        var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+        customerObjectStore.add(name);
+
 
     })
     
