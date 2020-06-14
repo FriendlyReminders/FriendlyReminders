@@ -20,7 +20,16 @@ request.onerror = function(event) {
 request.onsuccess = function(event) {
   db = event.target.result;
   console.log("run?");
-    
+  objectStore.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+        addCard(cursor);
+        cursor.continue();
+    }
+    else {
+        window.alert("No more entries!");
+    }
+    };
 };
 request.onupgradeneeded = function(event) { 
     // Save the IDBDatabase interface 
@@ -95,16 +104,6 @@ async function openUpContact(){
 
     var objectStore = db.transaction("name").objectStore("name");
 
-    // objectStore.openCursor().onsuccess = function(event) {
-    // var cursor = event.target.result;
-    // if (cursor) {
-    //     window.alert("Key " + cursor.key + " Value: " + cursor.value);
-    //     cursor.continue();
-    // }
-    // else {
-    //     window.alert("No more entries!");
-    // }
-    // };
     
     if(supported){
         const props = ['name','tel'];
