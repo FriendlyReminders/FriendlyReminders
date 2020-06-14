@@ -95,16 +95,16 @@ async function openUpContact(){
 
     var objectStore = db.transaction("name").objectStore("name");
 
-    objectStore.openCursor().onsuccess = function(event) {
-    var cursor = event.target.result;
-    if (cursor) {
-        window.alert("Key " + cursor.key + " Value: " + cursor.value);
-        cursor.continue();
-    }
-    else {
-        window.alert("No more entries!");
-    }
-    };
+    // objectStore.openCursor().onsuccess = function(event) {
+    // var cursor = event.target.result;
+    // if (cursor) {
+    //     window.alert("Key " + cursor.key + " Value: " + cursor.value);
+    //     cursor.continue();
+    // }
+    // else {
+    //     window.alert("No more entries!");
+    // }
+    // };
     
     if(supported){
         const props = ['name','tel'];
