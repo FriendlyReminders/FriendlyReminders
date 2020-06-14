@@ -27,11 +27,12 @@ a{
 
 
 .smallFace {
-    height: 20vw;
+    width: 20vw;
     margin-left: 5vw;
     margin-top: 5vw;
     float: left;
 }
+
 
 h2 {
     font-size: 7vw;

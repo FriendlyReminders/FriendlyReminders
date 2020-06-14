@@ -86,18 +86,26 @@ function handleResults(contacts) {
     })
     
 }
+
 function addCard(contact){
     var div = document.createElement('div');
+    document.getElementById("cardList").appendChild(div);
+
     div.className = "friendCard";
     var img = document.createElement('img');
-    img.class = "smallFace";
+    div.appendChild(img);
     img.src = "images/Man.png"
+    img.className = "smallFace";
+
+
     var div2 = document.createElement('div');
-    div2.class = "talkToText";
+    div.appendChild(div2);
+    div2.className = "talkToText";
+
+
     var h2 = document.createElement('h2');
+    div2.appendChild(h2);
     h2.innerHTML="Talk to "+contact;
     div2.appendChild(h2);
     div.appendChild(img);
-    div.appendChild(div2);
-    document.getElementById("cardList").appendChild(div);
 }
