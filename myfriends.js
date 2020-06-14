@@ -134,14 +134,14 @@ function handleResults(contacts) {
             name:names[i],tel:numbers[i],contactNumber:0,personNumber:0,contactDate:"never"
         }
         customerObjectStore.add(person);
-        addCard(person.name);
+        addCard(person);
     }
     
     
 }
 function addCard(contact){
     var a = document.createElement('a');
-    a.href = "/person?name="+contact;
+    a.href = "/person?name="+contact.name+"&tel="+contact.tel;
     document.getElementById("cardList").appendChild(a);
 
     var div = document.createElement('div');
@@ -161,7 +161,7 @@ function addCard(contact){
 
     var h2 = document.createElement('h2');
     div2.appendChild(h2);
-    h2.innerHTML="Talk to "+contact;
+    h2.innerHTML=contact.name;
     div2.appendChild(h2);
     div.appendChild(img);
 }
