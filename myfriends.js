@@ -114,10 +114,7 @@ async function openUpContact(){
         handleResults(contacts);
         } catch (ex) {
         // Handle any errors here.
-        window.alert("AASDIHADA");
-
-        window.alert("wait what?");
-        window.alert(ex);
+            window.alert(ex);
         }
     }
 }
@@ -127,16 +124,14 @@ function handleResults(contacts) {
     var names = [];
     contacts.forEach((contact) => {
         names.push(contact.name)
-
     }
     )
-    window.alert("Please help me");
-    for(var i = 0;i<names.length;i++){
+    names.forEach((name)=>{
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-        var person = names[i];
-        customerObjectStore.add(person);
-        addCard(names[i]);
-    }
+        customerObjectStore.add(name);
+        
+    })
+    
 }
 
 function addCard(contact){
