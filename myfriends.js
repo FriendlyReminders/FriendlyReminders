@@ -95,19 +95,19 @@ async function openUpContact(){
 
     var objectStore = db.transaction("name").objectStore("name");
 
-    objectStore.openCursor().onsuccess = function(event) {
-    var cursor = event.target.result;
-    if (cursor) {
-        window.alert("Key " + cursor.key + " Value: " + cursor.value);
-        cursor.continue();
-    }
-    else {
-        window.alert("No more entries!");
-    }
-    };
+    // objectStore.openCursor().onsuccess = function(event) {
+    // var cursor = event.target.result;
+    // if (cursor) {
+    //     window.alert("Key " + cursor.key + " Value: " + cursor.value);
+    //     cursor.continue();
+    // }
+    // else {
+    //     window.alert("No more entries!");
+    // }
+    // };
     
     if(supported){
-        const props = ['name'];
+        const props = ['name','tel'];
         const opts = {multiple: true};
         try {
         const contacts = await navigator.contacts.select(props, opts);
@@ -122,22 +122,30 @@ async function openUpContact(){
   
 function handleResults(contacts) {
     var names = [];
+    var numbers = []
     contacts.forEach((contact) => {
         names.push(contact.name)
+        numbers.push(contact.tel);
     }
     )
-    names.forEach((name)=>{
+    for(var i = 0;i<names.length;i++){
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-        customerObjectStore.add(name);
-
-
-    })
+        var person = {
+            name:names[i],tel:numbers[i],contactNumber:0,personNumber:0,contactDate:"never"
+        }
+        customerObjectStore.add(person);
+        addCard(person.name);
+    }
+    
     
 }
-
 function addCard(contact){
+    var a = document.createElement('a');
+    a.href = "/person?name="+contact;
+    document.getElementById("cardList").appendChild(a);
+
     var div = document.createElement('div');
-    document.getElementById("cardList").appendChild(div);
+    a.appendChild(div);
 
     div.className = "friendCard";
     var img = document.createElement('img');
