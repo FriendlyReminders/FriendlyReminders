@@ -53,9 +53,10 @@ h2 {
 }
 #personBox{
     width: 50vw;
-    margin-left: 25%;
+    margin-left: 10vw;
     background-color: white;
     border-radius: 20px 20px 20px;
+    float: left;
 }
 
 #potd {
@@ -69,6 +70,7 @@ h2 {
     /* min-height: 30vw; */
     border-radius: 2vw;
     background-color: white;
+    overflow: hidden;
 }
 
 #lastFriendlyInteractionCard {
@@ -93,6 +95,15 @@ h3 {
     text-align: center;
     padding-top: 2vw;
     margin-bottom: 2vw;
+    margin-top: 4vw;
+}
+.iconActions{
+    background-color: white;
+    border-radius: 10px 10px 10px;
+
+}
+.iconActions:first-child{
+    margin-bottom: 3vh;
 }
 
 .possibleTopic {
@@ -111,4 +122,15 @@ h3 {
     margin-left: 5vw;
     padding-bottom: 2vw;
     max-width: 100%;
+}
+.mediaDiv{
+    width: 14vw;
+    margin-right: 7vw;
+    float: left;
+    background-color: white;
+    border-radius: 5px 5px 5px;
+    min-height: 14vh;
+}
+.mediaDiv:first-child{
+    margin-left: 10vw;
 }
