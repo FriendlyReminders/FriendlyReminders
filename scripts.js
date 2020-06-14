@@ -109,3 +109,8 @@ function addCard(contact){
     div2.appendChild(h2);
     div.appendChild(img);
 }
+
+// Retrieve Firebase Messaging object.
+const messaging = firebase.messaging();
+// Add the public key generated from the console here.
+messaging.usePublicVapidKey("BJhYGR06GEK0DA2sKNDDdUkk7WKnVk6UmyQOy-HOa2NAEo06HStm_bxQLkEDuf8T19w131q_IObZ-QxkvdB9utI");
