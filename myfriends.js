@@ -111,6 +111,7 @@ async function openUpContact(){
         const opts = {multiple: true};
         try {
         const contacts = await navigator.contacts.select(props, opts);
+        window.alert("AASDIHADA");
         handleResults(contacts);
         } catch (ex) {
         // Handle any errors here.
