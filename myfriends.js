@@ -43,6 +43,7 @@ request.onupgradeneeded = function(event) {
     // Create an objectStore for this db
     var objectStore = db.createObjectStore("name",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
+        console.log("created object store");
     };
     
 
