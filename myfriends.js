@@ -21,6 +21,12 @@ request.onsuccess = async function(event) {
     db = event.target.result;
     console.log(db);
     
+    var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+        var person = {
+            name:"james",tel:"5",contactNumber:0,personNumber:0,contactDate:"never"
+        }
+        customerObjectStore.add(person);
+        addCard(person);
      
     var transaction = db.transaction("name").objectStore("name");
 
@@ -44,6 +50,10 @@ request.onupgradeneeded = function(event) {
     var objectStore = db.createObjectStore("name",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
         console.log("created object store");
+    };
+    var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    objectStore.transaction.oncomplete = function(event) {
+        console.log("creation is complete");
     };
     
 

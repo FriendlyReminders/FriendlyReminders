@@ -50,7 +50,7 @@ if (!('indexedDB' in window)) {
     console.log('This browser should support IndexedDB')
 }
 var db2;
-var request = indexedDB.open("new database");
+var request = indexedDB.open("MyTestDatabase");
 request.onerror = function(event) {
   console.log("Why didn't you allow my web app to use IndexedDB?!");
 };
