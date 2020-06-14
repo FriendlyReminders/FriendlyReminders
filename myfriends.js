@@ -17,7 +17,7 @@ var request = indexedDB.open("MyTestDatabase");
 request.onerror = function(event) {
   console.log("Why didn't you allow my web app to use IndexedDB?!");
 };
-request.onsuccess = function(event) {
+request.onsuccess = async function(event) {
     db = event.target.result;
     console.log(db);
     var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
@@ -26,23 +26,19 @@ request.onsuccess = function(event) {
     }
     customerObjectStore.add(person);
      
-     var transaction = db.transaction("name","readwrite").objectStore("name");
-     for(var i = 10;i>-1;i++){
-         var thingy = transaction.get(i)
-         thingy.onsuccess = function(event){
-             console.log(event.result.name);
-             console.log(i);
-             if(event.result.name==undefined){
-                i==-50
-            }
-         }
-        //  console.log(transaction.get(i).result)
-        
-        db.transaction("name").objectStore("name").get(i).onsuccess = function(event) {
-            console.log(event.target.result.name);
-        };
-        
-     }
+    var transaction = db.transaction("name").objectStore("name");
+
+    transaction.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+        console.log("Name for SSN " + cursor.key + " is " + cursor.value.name);
+        addCard(cursor.value);
+        cursor.continue();
+    }
+    else {
+        console.log("No more entries!");
+    }
+    };
 };
 request.onupgradeneeded = function(event) { 
     // Save the IDBDatabase interface 
