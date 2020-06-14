@@ -141,10 +141,11 @@ h3 {
     bottom: 25vw;
     right: 10vw;
     border-radius: 2vw;
-    background-color: white;
+    background-color: rgb(214, 214, 214);
     padding: 0;
     margin: 0;
     border: none;
+    z-index: 15;;
 }
 
 #contactPickerButtonImg {

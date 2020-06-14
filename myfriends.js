@@ -141,7 +141,7 @@ function handleResults(contacts) {
 }
 function addCard(contact){
     var a = document.createElement('a');
-    a.href = "person.html/"+contact;
+    a.href = "person.html/?name="+contact;
     document.getElementById("cardList").appendChild(a);
 
     var div = document.createElement('div');
