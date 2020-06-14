@@ -133,7 +133,7 @@ function handleResults(contacts) {
     window.alert("Please help me");
     for(var i = 0;i<names.length;i++){
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-        var person = {name:names[i],tel:0,contactedTimes:0,personTime:0,personDate:"Never"}
+        var person = names[i];
         customerObjectStore.add(person);
         addCard(names[i]);
     }
