@@ -111,10 +111,11 @@ async function openUpContact(){
         const opts = {multiple: true};
         try {
         const contacts = await navigator.contacts.select(props, opts);
-        window.alert("AASDIHADA");
         handleResults(contacts);
         } catch (ex) {
         // Handle any errors here.
+        window.alert("AASDIHADA");
+
         window.alert("wait what?");
             window.alert(ex);
         }
@@ -127,17 +128,17 @@ function handleResults(contacts) {
     var numbers = [];
     contacts.forEach((contact) => {
         names.push(contact.name)
-        //numbers.push(contact.tel);
+        numbers.push(contact.tel);
 
     }
     )
     window.alert("Please help me");
-    // for(var i = 0;i<names.length;i++){
-    //     var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-    //     var person = {name:names[i],tel:tel[i],contactedTimes:0,personTime:0,personDate:"Never"}
-    //     customerObjectStore.add(person);
-    //     addCard(names[i]);
-    // }
+    for(var i = 0;i<names.length;i++){
+        var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+        var person = {name:names[i],tel:tel[i],contactedTimes:0,personTime:0,personDate:"Never"}
+        customerObjectStore.add(person);
+        addCard(names[i]);
+    }
 }
 
 function addCard(contact){
