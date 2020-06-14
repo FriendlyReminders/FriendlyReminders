@@ -126,14 +126,13 @@ function handleResults(contacts) {
     contacts.forEach((contact) => {
         names.push(contact.name)
         numbers.push(contact.tel);
-        addCard(contact.name);
     }
     )
     for(var i = 0;i<names.length;i++){
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
         var person = {name:names[i],tel:tel[i],contactedTimes:0,personTime:0,personDate:"Never"}
         customerObjectStore.add(person);
-
+        addCard(names[i]);
     }
 }
 
