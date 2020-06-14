@@ -126,7 +126,8 @@ function handleResults(contacts) {
     var numbers = [];
     contacts.forEach((contact) => {
         names.push(contact.name)
-        numbers.push(contact.tel);
+        //numbers.push(contact.tel);
+
     }
     )
     for(var i = 0;i<names.length;i++){
