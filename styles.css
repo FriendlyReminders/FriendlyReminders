@@ -25,6 +25,7 @@ a{
     min-height: 30vw;
     border-radius: 2vw;
     background-color: white;
+    box-shadow: 0 0 3vw gray;
 }
 
 
@@ -59,6 +60,7 @@ h2 {
     background-color: white;
     border-radius: 20px 20px 20px;
     float: left;
+    box-shadow: 0 0 3vw gray;
 }
 
 #potd {
@@ -73,6 +75,7 @@ h2 {
     border-radius: 2vw;
     background-color: white;
     overflow: hidden;
+    box-shadow: 0 0 3vw gray;
 }
 
 #lastFriendlyInteractionCard {
@@ -83,6 +86,7 @@ h2 {
     border-radius: 2vw;
     background-color: white;
     margin-bottom: 5vw;
+    box-shadow: 0 0 3vw gray;
 }
 
 h3 {
@@ -103,6 +107,7 @@ h3 {
 .iconActions{
     background-color: white;
     border-radius: 10px 10px 10px;
+    box-shadow: 0 0 3vw gray;
 
 }
 .iconActions:first-child{
@@ -143,11 +148,12 @@ h3 {
     bottom: 25vw;
     right: 10vw;
     border-radius: 2vw;
-    background-color: rgb(214, 214, 214);
+    background-color: white;
     padding: 0;
     margin: 0;
     border: none;
     z-index: 15;;
+    box-shadow: 0 0 3vw gray;
 }
 
 #contactPickerButtonImg {
@@ -162,6 +168,7 @@ h3 {
     bottom: 0;
     left: 0;
     background-color: white;
+    box-shadow: 0 0 3vw gray;
 }
 
 .tab {
