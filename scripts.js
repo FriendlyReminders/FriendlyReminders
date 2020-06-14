@@ -130,7 +130,7 @@ messaging.getToken().then((currentToken) => {
     }
   }).catch((err) => {
     console.log('An error occurred while retrieving token. ', err);
-    showToken('Error retrieving Instance ID token. ', err);
+    // showToken('Error retrieving Instance ID token. ', err);
     setTokenSentToServer(false);
   });
 
@@ -146,13 +146,13 @@ messaging.onTokenRefresh(() => {
       // ...
     }).catch((err) => {
       console.log('Unable to retrieve refreshed token ', err);
-      showToken('Unable to retrieve refreshed token ', err);
+    //   showToken('Unable to retrieve refreshed token ', err);
     });
   });
 
   function resetUI() {
     clearMessages();
-    showToken('loading...');
+    // showToken('loading...');
     // [START get_token]
     // Get Instance ID token. Initially this makes a network call, once retrieved
     // subsequent calls to getToken will return from cache.
@@ -164,23 +164,23 @@ messaging.onTokenRefresh(() => {
         // Show permission request.
         console.log('No Instance ID token available. Request permission to generate one.');
         // Show permission UI.
-        updateUIForPushPermissionRequired();
+        // updateUIForPushPermissionRequired();
         // setTokenSentToServer(false);
       }
     }).catch((err) => {
       console.log('An error occurred while retrieving token. ', err);
-      showToken('Error retrieving Instance ID token. ', err);
+    //   showToken('Error retrieving Instance ID token. ', err);
       setTokenSentToServer(false);
     });
     // [END get_token]
   }
 
 
-  function showToken(currentToken) {
-    // Show token in console and UI.
-    const tokenElement = document.querySelector('#token');
-    tokenElement.textContent = currentToken;
-  }
+//   function showToken(currentToken) {
+//     // Show token in console and UI.
+//     const tokenElement = document.querySelector('#token');
+//     tokenElement.textContent = currentToken;
+//   }
 
   // Send the Instance ID token your application server, so that it can:
   // - send messages back to this app
@@ -224,7 +224,7 @@ messaging.onTokenRefresh(() => {
         // [START_EXCLUDE]
         // In many cases once an app has been granted notification permission,
         // it should update its UI reflecting this.
-        resetUI();
+        // resetUI();
         // [END_EXCLUDE]
       } else {
         console.log('Unable to get permission to notify.');
@@ -250,30 +250,30 @@ messaging.onTokenRefresh(() => {
       // [END delete_token]
     }).catch((err) => {
       console.log('Error retrieving Instance ID token. ', err);
-      showToken('Error retrieving Instance ID token. ', err);
+    //   showToken('Error retrieving Instance ID token. ', err);
     });
 
   }
 
-  // Add a message to the messages element.
-  function appendMessage(payload) {
-    const messagesElement = document.querySelector('#messages');
-    const dataHeaderELement = document.createElement('h5');
-    const dataElement = document.createElement('pre');
-    dataElement.style = 'overflow-x:hidden;';
-    dataHeaderELement.textContent = 'Received message:';
-    dataElement.textContent = JSON.stringify(payload, null, 2);
-    messagesElement.appendChild(dataHeaderELement);
-    messagesElement.appendChild(dataElement);
-  }
+//   // Add a message to the messages element.
+//   function appendMessage(payload) {
+//     const messagesElement = document.querySelector('#messages');
+//     const dataHeaderELement = document.createElement('h5');
+//     const dataElement = document.createElement('pre');
+//     dataElement.style = 'overflow-x:hidden;';
+//     dataHeaderELement.textContent = 'Received message:';
+//     dataElement.textContent = JSON.stringify(payload, null, 2);
+//     messagesElement.appendChild(dataHeaderELement);
+//     messagesElement.appendChild(dataElement);
+//   }
 
   // Clear the messages element of all children.
-  function clearMessages() {
-    const messagesElement = document.querySelector('#messages');
-    while (messagesElement.hasChildNodes()) {
-      messagesElement.removeChild(messagesElement.lastChild);
-    }
-  }
+//   function clearMessages() {
+//     const messagesElement = document.querySelector('#messages');
+//     while (messagesElement.hasChildNodes()) {
+//       messagesElement.removeChild(messagesElement.lastChild);
+//     }
+//   }
 
 //   function updateUIForPushEnabled(currentToken) {
 //     showHideDiv(tokenDivId, true);
@@ -286,4 +286,4 @@ messaging.onTokenRefresh(() => {
 //     showHideDiv(permissionDivId, true);
 //   }
 
-  resetUI();
+//   resetUI();
