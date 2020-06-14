@@ -18,19 +18,31 @@ request.onerror = function(event) {
   console.log("Why didn't you allow my web app to use IndexedDB?!");
 };
 request.onsuccess = function(event) {
-  db = event.target.result;
-  console.log(db);
-  var transaction = db.transaction("name","readwrite").objectStore("name");
-    transaction.openCursor().onsuccess = function(event) {
-     var cursor = event.target.result;
-     if (cursor) {
-         addCard(cursor);
-         cursor.continue();
+    db = event.target.result;
+    console.log(db);
+    var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+    var person = {
+        name:"james",tel:"hello?",contactNumber:0,personNumber:0,contactDate:"never"
+    }
+    customerObjectStore.add(person);
+     
+     var transaction = db.transaction("name","readwrite").objectStore("name");
+     for(var i = 10;i>-1;i++){
+         var thingy = transaction.get(i)
+         thingy.onsuccess = function(event){
+             console.log(event.result.name);
+             console.log(i);
+             if(event.result.name==undefined){
+                i==-50
+            }
+         }
+        //  console.log(transaction.get(i).result)
+        
+        db.transaction("name").objectStore("name").get(i).onsuccess = function(event) {
+            console.log(event.target.result.name);
+        };
+        
      }
-     else {
-         window.alert("No more entries!");
-     }
-     };
 };
 request.onupgradeneeded = function(event) { 
     // Save the IDBDatabase interface 
@@ -45,10 +57,7 @@ request.onupgradeneeded = function(event) {
 };
 
 function reRender(){
-    console.log("I'm trying something");
-    
 
-     console.log("I did it? Maybe?");
 }
 function urlB64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - base64String.length % 4) % 4);
