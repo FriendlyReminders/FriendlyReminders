@@ -1,7 +1,7 @@
 {
     "name": "Friendly Reminders",
     "short_name": "FR",
-    "display": "minimal-ui",
+    "display": "standalone",
     "start_url": "/",
     "theme_color": "#fbc2eb",
     "background_color": "#111111",
