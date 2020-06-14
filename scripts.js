@@ -107,6 +107,10 @@ request.onupgradeneeded = function(event) {
     objectStore.transaction.oncomplete = function(event) {
         console.log("creation is complete");
     };
+    var objectStore2 = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    objectStore.transaction.oncomplete = function(event) {
+        console.log("creation is complete");
+    };
     
 
 };
