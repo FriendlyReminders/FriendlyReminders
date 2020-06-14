@@ -129,7 +129,8 @@ function handleResults(contacts) {
     names.forEach((name)=>{
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
         customerObjectStore.add(name);
-        
+        addCard(name);
+
     })
     
 }
