@@ -90,8 +90,9 @@ function addCard(contact){
     var div = document.createElement('div');
     div.className = "friendCard";
     var img = document.createElement('img');
-    img.class = "smallFace";
     img.src = "images/Man.png"
+
+    img.class = "smallFace";
     var div2 = document.createElement('div');
     div2.class = "talkToText";
     var h2 = document.createElement('h2');
