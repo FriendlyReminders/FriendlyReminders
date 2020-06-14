@@ -86,6 +86,7 @@ function handleResults(contacts) {
     })
     
 }
+
 function addCard(contact){
     var div = document.createElement('div');
     document.getElementById("cardList").appendChild(div);
@@ -94,12 +95,12 @@ function addCard(contact){
     var img = document.createElement('img');
     div.appendChild(img);
     img.src = "images/Man.png"
-    img.class = "smallFace";
+    img.className = "smallFace";
 
 
     var div2 = document.createElement('div');
     div.appendChild(div2);
-    div2.class = "talkToText";
+    div2.className = "talkToText";
 
 
     var h2 = document.createElement('h2');
