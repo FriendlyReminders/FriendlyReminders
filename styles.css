@@ -134,3 +134,42 @@ h3 {
 .mediaDiv:first-child{
     margin-left: 10vw;
 }
+
+#contactPickerButton {
+    position: absolute;
+    bottom: 25vw;
+    right: 10vw;
+    border-radius: 2vw;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+#contactPickerButtonImg {
+    width: 15vw;
+    height: 15vw;
+}
+
+#footerDiv {
+    height: 15vw;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+}
+
+.tab {
+    width: 33vw;
+    float: left;
+}
+
+.tabImg {
+    height: 15vw;
+    width: auto;
+    margin-left: 9vw;
+}
+
+#thisPage {
+    background-color: #eeeeee;
+}
