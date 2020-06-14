@@ -130,12 +130,13 @@ function handleResults(contacts) {
 
     }
     )
-    for(var i = 0;i<names.length;i++){
-        var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-        var person = {name:names[i],tel:tel[i],contactedTimes:0,personTime:0,personDate:"Never"}
-        customerObjectStore.add(person);
-        addCard(names[i]);
-    }
+    window.alert("Please help me");
+    // for(var i = 0;i<names.length;i++){
+    //     var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+    //     var person = {name:names[i],tel:tel[i],contactedTimes:0,personTime:0,personDate:"Never"}
+    //     customerObjectStore.add(person);
+    //     addCard(names[i]);
+    // }
 }
 
 function addCard(contact){
