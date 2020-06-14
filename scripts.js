@@ -1,7 +1,7 @@
 const publicKey = 'BGo3-1nTAVTQ1cM4py5Fp5HO5oHzTRsJY3bhwCsLxDDlpV38aNOaTL74e2QqT_6T6IxTQuIoSRZ-OZxcNGXltVs';
 //private key: KdjGpy8sBHIaMIkMS2Te3cB3u2xep4pV0pU1XXL38gI
 
-navigator.serviceWorker && navigator.serviceWorker.register('./sw.js').then(function(registration) {
+navigator.serviceWorker && navigator.serviceWorker.register('./firebase-messaging-sw.js').then(function(registration) {
     console.log('Excellent, registered with scope: ', registration.scope);
 });
 
