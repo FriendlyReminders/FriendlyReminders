@@ -121,13 +121,13 @@ async function openUpContact(){
 
   
 function handleResults(contacts) {
-    var names = [];
-    var numbers = []
-    contacts.forEach((contact) => {
-        names.push(contact.name)
-        numbers.push(contact.tel);
-    }
-    )
+    var names = ["james","keith"];
+    var numbers = [3,5]
+    // contacts.forEach((contact) => {
+    //     names.push(contact.name)
+    //     numbers.push(contact.tel);
+    // }
+    // )
     for(var i = 0;i<names.length;i++){
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
         var person = {
