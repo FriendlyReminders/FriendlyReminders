@@ -20,8 +20,7 @@ request.onerror = function(event) {
 request.onsuccess = function(event) {
   db = event.target.result;
   console.log(db);
-  db.onsuccess = function(event){
-    var transaction = db.transaction("name","readwrite").objectStore("name");
+  var transaction = db.transaction("name","readwrite").objectStore("name");
     transaction.openCursor().onsuccess = function(event) {
      var cursor = event.target.result;
      if (cursor) {
@@ -32,7 +31,6 @@ request.onsuccess = function(event) {
          window.alert("No more entries!");
      }
      };
-  }
 };
 request.onupgradeneeded = function(event) { 
     // Save the IDBDatabase interface 
@@ -46,7 +44,12 @@ request.onupgradeneeded = function(event) {
 
 };
 
+function reRender(){
+    console.log("I'm trying something");
+    
 
+     console.log("I did it? Maybe?");
+}
 function urlB64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - base64String.length % 4) % 4);
     var base64 = (base64String + padding)
