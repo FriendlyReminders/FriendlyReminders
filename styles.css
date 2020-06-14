@@ -37,7 +37,7 @@ h2 {
     font-size: 7vw;
     margin: 0%;
     position: relative;
-    max-width: 48vw;
+    
     overflow-wrap: break-word;
     /* left: -5vw; */
 }
@@ -47,6 +47,7 @@ h2 {
     float:right;
     margin-top: 3vw;
     margin-left: 5vw;
+    max-width: 48vw;
     /* height: 30vw; */
 }
 #personBox{
@@ -54,4 +55,59 @@ h2 {
     margin-left: 25%;
     background-color: white;
     border-radius: 20px 20px 20px;
+}
+
+#potd {
+    font-size: 9vw;
+}
+
+#possibleTopicsCard {
+    margin-top: 5vw;
+    width: 80vw;
+    margin-left: 10vw;
+    /* min-height: 30vw; */
+    border-radius: 2vw;
+    background-color: white;
+}
+
+#lastFriendlyInteractionCard {
+    margin-top: 5vw;
+    width: 80vw;
+    margin-left: 10vw;
+    /* min-height: 30vw; */
+    border-radius: 2vw;
+    background-color: white;
+}
+
+h3 {
+    font-size: 7vw;
+    margin: 0%;
+    position: relative;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    font-weight: 400;
+}
+
+#possibleTopicsText {
+    text-align: center;
+    padding-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+.possibleTopic {
+    margin-left: 5vw;
+    padding-bottom: 2vw;
+    max-width: 100%;
+}
+
+#lastFriendlyInteractionText {
+    text-align: center;
+    padding-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+.lastFriendlyInteraction {
+    margin-left: 5vw;
+    padding-bottom: 2vw;
+    max-width: 100%;
 }
