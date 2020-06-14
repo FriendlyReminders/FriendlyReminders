@@ -19,17 +19,20 @@ request.onerror = function(event) {
 };
 request.onsuccess = function(event) {
   db = event.target.result;
-  console.log("run?");
-  objectStore.openCursor().onsuccess = function(event) {
-    var cursor = event.target.result;
-    if (cursor) {
-        addCard(cursor);
-        cursor.continue();
-    }
-    else {
-        window.alert("No more entries!");
-    }
-    };
+  console.log(db);
+  db.onsuccess = function(event){
+    var transaction = db.transaction("name","readwrite").objectStore("name");
+    transaction.openCursor().onsuccess = function(event) {
+     var cursor = event.target.result;
+     if (cursor) {
+         addCard(cursor);
+         cursor.continue();
+     }
+     else {
+         window.alert("No more entries!");
+     }
+     };
+  }
 };
 request.onupgradeneeded = function(event) { 
     // Save the IDBDatabase interface 
@@ -39,6 +42,7 @@ request.onupgradeneeded = function(event) {
     var objectStore = db.createObjectStore("name",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
     };
+    
 
 };
 
