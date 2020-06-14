@@ -131,7 +131,7 @@ function handleResults(contacts) {
     for(var i = 0;i<names.length;i++){
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
         var person = {
-            name:names[i],tel:number[i],contactNumber:0,personNumber:0,contactDate:never
+            name:names[i],tel:numbers[i],contactNumber:0,personNumber:0,contactDate:never
         }
         customerObjectStore.add(person);
         addCard(person.name);
