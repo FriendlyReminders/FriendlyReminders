@@ -107,7 +107,7 @@ async function openUpContact(){
     };
     
     if(supported){
-        const props = ['name','tel'];
+        const props = ['name'];
         const opts = {multiple: true};
         try {
         const contacts = await navigator.contacts.select(props, opts);
@@ -117,7 +117,7 @@ async function openUpContact(){
         window.alert("AASDIHADA");
 
         window.alert("wait what?");
-            window.alert(ex);
+        window.alert(ex);
         }
     }
 }
@@ -125,17 +125,15 @@ async function openUpContact(){
   
 function handleResults(contacts) {
     var names = [];
-    var numbers = [];
     contacts.forEach((contact) => {
         names.push(contact.name)
-        numbers.push(contact.tel);
 
     }
     )
     window.alert("Please help me");
     for(var i = 0;i<names.length;i++){
         var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-        var person = {name:names[i],tel:tel[i],contactedTimes:0,personTime:0,personDate:"Never"}
+        var person = {name:names[i],tel:0,contactedTimes:0,personTime:0,personDate:"Never"}
         customerObjectStore.add(person);
         addCard(names[i]);
     }
