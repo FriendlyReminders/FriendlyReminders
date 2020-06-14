@@ -42,22 +42,6 @@ request.onsuccess = async function(event) {
     }
     };
 };
-request.onupgradeneeded = function(event) { 
-    // Save the IDBDatabase interface 
-    db = event.target.result;
-    console.log("upgradeneeded");
-    // Create an objectStore for this db
-    var objectStore = db.createObjectStore("name",{autoIncrement: "true"});
-    objectStore.transaction.oncomplete = function(event) {
-        console.log("created object store");
-    };
-    var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
-    objectStore.transaction.oncomplete = function(event) {
-        console.log("creation is complete");
-    };
-    
-
-};
 
 function reRender(){
 

@@ -58,7 +58,13 @@ request.onerror = function(event) {
 request.onsuccess = async function(event) {
     db2 = event.target.result;
     console.log(db2);
-
+    
+    var customerObjectStore = db2.transaction("name", "readwrite").objectStore("name");
+    var person = {
+        name:"james",tel:"5",contactNumber:0,personNumber:0,contactDate:"never"
+    }
+    customerObjectStore.add(person);
+    addCard(person);
 
     var sameDate = false;
     var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
@@ -84,15 +90,18 @@ request.onsuccess = async function(event) {
         }
     }
     if(!sameDate){
-        var array = customerObjectStore.getAll();
-        if(array.length>0){
-            var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
-            var date = {
-                year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
-            }
-            customerObjectStore.add(date);
-            addCard(array[Math.floor(Math.random()*array.length)])
+        var count = db2.transaction("name").objectStore("name").count();
+        console.log(count);
+        var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
+        var date = {
+            year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
         }
+        customerObjectStore.add(date);
+
+        var index = Math.floor(Math.random()*count);
+        db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
+            addCard(event.target.result);
+        };
         
     }
 
@@ -103,11 +112,11 @@ request.onupgradeneeded = function(event) {
     db2 = event.target.result;
     console.log("upgradeneeded");
     // Create an objectStore for this db2
-    var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    var objectStore = db2.createObjectStore("name",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
-        console.log("creation is complete");
+        console.log("created object store");
     };
-    var objectStore2 = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
+    var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
         console.log("creation is complete");
     };
