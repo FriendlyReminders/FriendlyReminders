@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap" rel="stylesheet">    </head>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="manifest" href="manifest.json" />
-    <body>
+    <body onload="doStuff()">
         <h1 style="margin-bottom: 5vh;margin-top: 5vh;"><span id = "potd">Person of the Day</span></h1>
         <div id="personBox">
             <img src="images/Man.png" style="width: 60%;padding: 10%;margin-left: 10%;padding-bottom: 2%;">
@@ -18,7 +18,7 @@
                 <img src="images/callIcon.png" style="width: 100%;">
             </div>
             <div class="iconActions">
-                <a href="sms:?body=Hello" target="_blank">
+                <a href="sms:?body=Hello" target="_blank" id="smsID">
                 <img src="images/textIcon.png" style="width: 100%;">
                 </a>
             </div>
