@@ -115,7 +115,7 @@ request.onsuccess = async function(event) {
         };
 
     }
-    var transaction = db.transaction("peopleDay").objectStore("peopleDay");
+    var transaction = db2.transaction("peopleDay").objectStore("peopleDay");
 
     transaction.openCursor().onsuccess = function(event) {
     var cursor = event.target.result;
