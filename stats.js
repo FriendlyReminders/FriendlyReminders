@@ -33,7 +33,7 @@ request.onerror = function(event) {
 var friendCount = 0;
 var displayedFriendCount = 0;
 
-var graphValues = [0, 1, 0, 3, 5, 2, 1, 1, 0, 3, 4, 5, 4, 3, 2, 1, 1, 0, 1, 1];
+var graphValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 2, 5];
 var graphMax = 6;
 var animatedGraphMax = 50;
 
