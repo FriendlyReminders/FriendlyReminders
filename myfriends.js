@@ -144,7 +144,7 @@ function addCard(contact){
     document.getElementById("cardList").appendChild(a);
 
     var div = document.createElement('div');
-    a.appendChild(div);
+    a.prepend(div);
 
     div.className = "friendCard";
     var img = document.createElement('img');
