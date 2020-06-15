@@ -59,12 +59,12 @@ request.onsuccess = async function(event) {
     db2 = event.target.result;
     console.log(db2);
     
-    var customerObjectStore = db2.transaction("name", "readwrite").objectStore("name");
-    var person = {
-        name:"james",tel:"5",contactNumber:0,personNumber:0,contactDate:"never"
-    }
-    customerObjectStore.add(person);
-    addCard(person);
+    // var customerObjectStore = db2.transaction("name", "readwrite").objectStore("name");
+    // var person = {
+    //     name:"james",tel:"5",contactNumber:0,personNumber:0,contactDate:"never"
+    // }
+    // customerObjectStore.add(person);
+    // addCard(person);
 
     var sameDate = false;
     var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
