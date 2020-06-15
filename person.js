@@ -18,7 +18,7 @@ function doStuff(){
     document.getElementById("callID").href = "tel: "+telephone;
     console.log(possibleMessages.length);
     var message = "sms:?body="+possibleMessages[Math.floor((Math.random()*possibleMessages.length))]
-    document.getElementById("smsID").href = message;
+    document.getElementById("textID").href = message;
     console.log(message);
 }
 
