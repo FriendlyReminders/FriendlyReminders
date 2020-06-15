@@ -57,8 +57,10 @@ request.onerror = function(event) {
 
 request.onsuccess = async function(event) {
     db2 = event.target.result;
-    console.log(db2);
     
+    // var customerObjectStore = db2.transaction("name", "readwrite").objectStore("name");
+    // var person = {name: "James",tel:"sfdaosdjfosa"}
+    // customerObjectStore.add(person);
     // var customerObjectStore = db2.transaction("name", "readwrite").objectStore("name");
     // var person = {
     //     name:"james",tel:"5",contactNumber:0,personNumber:0,contactDate:"never"
@@ -67,21 +69,40 @@ request.onsuccess = async function(event) {
     // addCard(person);
 
     var sameDate = false;
+    var addedPerson = false;
     var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
-    var d = new Date();
-    transaction.openCursor().onsuccess = function(event) {
+    customerObjectStore.add(date);
+    transaction.openCursor().onsuccess = async function(event) {
         var cursor = event.target.result;
         if (cursor) {
-            if(d.getFullYear()==cursor.value.year){
-                console.log("Years match");
-                if(d.getMonth()==cursor.value.month){
-                    console.log("Months match");
-                    if(d.getDay()==cursor.value.day){
-                        console.log("Days match");
-                        sameDate = true;
+            console.log(d.getFullYear()+" "+cursor.value.year);
+            if(d.getDate()!=cursor.value.day||(d.getDate()==cursor.value.day&&d.getFullYear()!=cursor.value.year)){
+                console.log("Days match");
+                let tx = db2.transaction("name");
+                    var count = await tx.objectStore("name").count();
+                    console.log(count);
+
+                    count.onsuccess = () => {
+                        console.log(count.result);
+                        console.log("already added someone: "+addedPerson);
+                        if(count.result>0 && !addedPerson){
+                            //adds in a date
+                            addedPerson = true;
+                            var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
+                            var date = {
+                                year:d.getFullYear(),month:d.getMonth(),day:d.getDate()
+                            }
+                            customerObjectStore.add(date);
+                            var index = Math.ceil(Math.random()*count.result);
+                            db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
+
+                            var customerObjectStore = db2.transaction("peopleDay", "readwrite").objectStore("peopleDay");
+                            var person = event.target.result;
+                            customerObjectStore.add(person);
+                            }
+                            };
+                        };
                     }
-                }
-            }
             console.log("Year " + cursor.value.year+" Month "+cursor.value.month + " Day " + cursor.value.day);
             cursor.continue();
         }
@@ -89,38 +110,11 @@ request.onsuccess = async function(event) {
             console.log("No more entries!");
         }
     }
-    window.alert(sameDate);
-    if(!sameDate){
-        let tx = db2.transaction("name");
-        var count = await tx.objectStore("name").count();
-        count.onsuccess = () => {
-            console.log(count);
-            alert(count.result);
-            if(count.result>0){
-                //adds in a date
-                var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
-                var date = {
-                    year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
-                }
-                customerObjectStore.add(date);
-                var index = Math.ceil(Math.random()*count.result);
-                window.alert(index);
-                db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
-
-                    var customerObjectStore = db2.transaction("peopleDay", "readwrite").objectStore("peopleDay");
-                    var person = event.target.result;
-                    customerObjectStore.add(person);
-                };
-            };
-        };
-
-    }
     var transaction = db2.transaction("peopleDay").objectStore("peopleDay");
 
     transaction.openCursor().onsuccess = function(event) {
     var cursor = event.target.result;
     if (cursor) {
-        console.log("Name for SSN " + cursor.key + " is " + cursor.value.name);
         addCard(cursor.value);
         cursor.continue();
     }
@@ -128,10 +122,18 @@ request.onsuccess = async function(event) {
         console.log("No more entries!");
     }
     };
-
-
+    var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
+    var d = new Date();
+    var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
+    var date = {
+    year:d.getFullYear(),month:d.getMonth(),day:d.getDate()
+    }
+    customerObjectStore.add(date);
 }
-        
+
+
+function enterAPerson(){
+}    
 
 request.onupgradeneeded = function(event) { 
     // Save the Idb2Database interface 
@@ -145,11 +147,20 @@ request.onupgradeneeded = function(event) {
     var objectStore = db2.createObjectStore("dateAccessed",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
         console.log("creation is complete");
+        var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
+        var d = new Date();
+        var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
+        var date = {
+        year:d.getFullYear(),month:d.getMonth(),day:d.getDate()-1
+        }
+        customerObjectStore.add(date);
     };
     var objectStore = db2.createObjectStore("peopleDay",{autoIncrement: "true"});
     objectStore.transaction.oncomplete = function(event) {
         console.log("creation is complete");
     };
+
+
 
 };
 
