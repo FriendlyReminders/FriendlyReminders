@@ -78,6 +78,53 @@ h2 {
     box-shadow: 0 0 3vw gray;
 }
 
+#involvementCard {
+    margin-top: 5vw;
+    width: 80vw;
+    margin-left: 10vw;
+    /* min-height: 30vw; */
+    border-radius: 2vw;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 0 3vw gray;
+}
+
+#friendlyInvolvementText {
+    text-align: center;
+    margin-top: 3vw;
+}
+
+#involvementGraph {
+    width: 70vw;
+    height: 30vw;
+    margin-left: 5vw;
+}
+
+#friendCountCard {
+    margin-top: 5vw;
+    width: 80vw;
+    margin-left: 10vw;
+    /* min-height: 30vw; */
+    border-radius: 2vw;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 0 3vw gray;
+}
+
+#friendCountText {
+    text-align: center;
+    margin-top: 3vw;
+}
+
+#friendCount {
+    text-align: center;
+    font-weight: 900;
+    font-size: 30vw;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+}
+
+
 #lastFriendlyInteractionCard {
     margin-top: 5vw;
     width: 80vw;
