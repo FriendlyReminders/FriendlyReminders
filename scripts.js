@@ -147,7 +147,7 @@ async function enterAPerson(){
                 name:event.target.result.name,tel:event.target.result.tel,contactNumber:event.target.result.contactNumber,personNumber:event.target.result.personNumber,contactDate:event.target.result.contactDate
             }
             customerObjectStore.add(person);
-            }
+
             var transaction = db2.transaction("peopleDay").objectStore("peopleDay");
             document.getElementById("cardList").innerHTML = '';
             transaction.openCursor().onsuccess = function(event) {
@@ -160,6 +160,8 @@ async function enterAPerson(){
                 console.log("No more entries!");
             }
             };
+            }
+            
         }else{
             window.alert("You must add contacts before receiving a reminder!");
         }
