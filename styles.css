@@ -24,10 +24,12 @@ a{
     margin-left: 10vw;
     min-height: 30vw;
     border-radius: 2vw;
-    background-color: white;
+    background-color: #eeeeee ;   
     box-shadow: 0 0 3vw gray;
 }
-
+.friendCard:first-child{
+    background-color: white;
+}
 
 .smallFace {
     width: 20vw;
