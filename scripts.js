@@ -33,7 +33,7 @@ if(!isMobile){
 
     var bigFont = document.createElement("h1");
     bigFont.style.fontSize = "50px";
-    bigFont.innerHTML = "Due to restrictions with APIs, this project only works on a mobile phone"
+    bigFont.innerHTML = "Due to restrictions with APIs, this project only works on a mobile phone."
     document.getElementById("allContent").appendChild(bigFont);
     document.getElementById("footerDiv").style.boxShadow = "none"
     document.getElementById("footerDiv").innerHTML = "";
