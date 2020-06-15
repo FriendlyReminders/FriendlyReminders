@@ -1,4 +1,4 @@
-Stay Social.
+#Stay Social.
 
 
 ## Inspiration
