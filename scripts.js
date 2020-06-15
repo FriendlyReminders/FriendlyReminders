@@ -89,6 +89,7 @@ request.onsuccess = async function(event) {
             console.log("No more entries!");
         }
     }
+    window.alert(sameDate);
     if(!sameDate){
         var count = db2.transaction("name").objectStore("name").count();
         window.alert(count);
