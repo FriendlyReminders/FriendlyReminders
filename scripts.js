@@ -91,14 +91,14 @@ request.onsuccess = async function(event) {
     }
     if(!sameDate){
         var count = db2.transaction("name").objectStore("name").count();
-        console.log(count);
+        window.alert(count);
         if(count>0){
             var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
             var date = {
                 year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
             }
             customerObjectStore.add(date);
-    
+            window.alert(index);
             var index = Math.floor(Math.random()*count);
             db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
                 addCard(event.target.result);
