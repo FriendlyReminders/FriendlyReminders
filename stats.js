@@ -1,4 +1,36 @@
-var friendCount = 134;
+var friendCount = 0;
+var countInterval;
+const supported = ('contacts' in navigator && 'ContactsManager' in window);
+
+
+if (!('indexedDB' in window)) {
+    console.log('This browser doesn\'t support IndexedDB');
+}else{
+    console.log('This browser should support IndexedDB')
+}
+var db2;
+var request = indexedDB.open("MyTestDatabase");
+request.onerror = function(event) {
+  console.log("Why didn't you allow my web app to use IndexedDB?!");
+};
+request.onsuccess = async function(event) {
+    db2 = event.target.result;
+    let tx = db2.transaction("name");
+    var count = await tx.objectStore("name").count();
+    console.log(count);
+
+    count.onsuccess = () => {
+    console.log(count.result);
+    friendCount = count.result;
+    countInterval = window.setInterval(changeCount, 10);
+    }
+}
+request.onerror = function(event) {
+    console.log("Why didn't you allow my web app to use IndexedDB?!");
+};
+
+
+var friendCount = 0;
 var displayedFriendCount = 0;
 
 var graphValues = [0, 1, 0, 3, 5, 2, 1, 1, 0, 3, 4, 5, 4, 3, 2, 1, 1, 0, 1, 1];
@@ -41,4 +73,3 @@ function changeCount() {
 
 
 var graphInterval = window.setInterval(drawGraph, 30);
-var countInterval = window.setInterval(changeCount, 10);
