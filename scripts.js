@@ -97,23 +97,41 @@ request.onsuccess = async function(event) {
             console.log(count);
             alert(count.result);
             if(count.result>0){
+                //adds in a date
                 var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
                 var date = {
                     year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
                 }
                 customerObjectStore.add(date);
-                var index = Math.floor(Math.random()*count.result);
+                var index = Math.ceil(Math.random()*count.result);
                 window.alert(index);
                 db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
-                    addCard(event.target.result);
+
+                    var customerObjectStore = db2.transaction("peopleDay", "readwrite").objectStore("peopleDay");
+                    var person = event.target.result;
+                    customerObjectStore.add(person);
                 };
-            }
+            };
+        };
 
-        }
-        
     }
+    var transaction = db.transaction("peopleDay").objectStore("peopleDay");
 
-};
+    transaction.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+        console.log("Name for SSN " + cursor.key + " is " + cursor.value.name);
+        addCard(cursor.value);
+        cursor.continue();
+    }
+    else {
+        console.log("No more entries!");
+    }
+    };
+
+
+}
+        
 
 request.onupgradeneeded = function(event) { 
     // Save the Idb2Database interface 
@@ -128,7 +146,10 @@ request.onupgradeneeded = function(event) {
     objectStore.transaction.oncomplete = function(event) {
         console.log("creation is complete");
     };
-    
+    var objectStore = db2.createObjectStore("peopleDay",{autoIncrement: "true"});
+    objectStore.transaction.oncomplete = function(event) {
+        console.log("creation is complete");
+    };
 
 };
 
