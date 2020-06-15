@@ -136,10 +136,15 @@ async function enterAPerson(){
     var count = await tx.objectStore("name").count();
     var personAdded = false;
     count.onsuccess = () => {
-        if(count.result>0){
+        if(count.result>0&&!personAdded){
+            personAdded = true;
+            var index = Math.ceil(Math.random()*count.result);
+            db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
+
             var customerObjectStore = db2.transaction("peopleDay", "readwrite").objectStore("peopleDay");
             var person = event.target.result;
             customerObjectStore.add(person);
+            }
         }else{
             window.alert("You must add contacts before receiving a reminder!");
         }

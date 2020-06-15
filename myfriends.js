@@ -35,9 +35,9 @@ request.onsuccess = async function(event) {
         console.log("No more entries!");
     }
     };
-//     var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
-//     var person = {name: "James",tel:"sfdaosdjfosa"}
-//     customerObjectStore.add(person);
+    var customerObjectStore = db.transaction("name", "readwrite").objectStore("name");
+    var person = {name: "James",tel:"sfdaosdjfosa"}
+    customerObjectStore.add(person);
 };
 
 function reRender(){
