@@ -204,7 +204,7 @@ request.onupgradeneeded = function(event) {
 function addCard(contact){
     var a = document.createElement('a');
     a.href = "/person?name="+contact.name+"&tel="+contact.tel;
-    document.getElementById("cardList").appendChild(a);
+    document.getElementById("cardList").prepend(a);
 
     var div = document.createElement('div');
     a.appendChild(div);
