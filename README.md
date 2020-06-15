@@ -1,37 +1,19 @@
-## Welcome to GitHub Pages
+Stay Social.
 
-You can use the [editor on GitHub](https://github.com/SonavAgarwal/FriendlyReminders/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SonavAgarwal/FriendlyReminders/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Inspiration
+The lack of social interaction during the COVID-19 pandemic.
+## What it does
+Connects to a user's contacts and sends daily reminders to text a "person of the day".  Provides ideas for subject topics and has shortcuts to calling and texting those contacts.
+## How we built it
+We built a PWA which uses cached databases and notifications from firebase.
+## Challenges we ran into
+This was our first hackathon, and while we thought this idea would be fairly easy to implement, it was anything but.  Indexed DB was based on asynchronous functions which was something we had never seen before, leading to many conflicts with ordering.
+PWA's did not support two features that were necessary for this project - sharing icons over the contact picker api and sending scheduled notifications.  Both of these features are in development but not accessible for the public.
+Finally, the contact picker API, one of the hearts of our project, only worked on mobile AND over HTTPS.  Due to this, we weren't able to easily debug using the console, and every code change we wanted to see had to be pushed to Github, which significantly slowed down progress.
+# Accomplishments that we're proud of
+Getting an actual functional product.
+## What we learned
+We learned how to follow and implement apis, debug various problems, and come up with ingenious solutions for technological problems.
+## What's next for Friendly Reminder
+Once icon support and scheduled notifications are released to the general public, we will implement these features.  We are planning to add more statistics features in the future, and make the UI more intuitive.
