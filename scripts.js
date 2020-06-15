@@ -133,7 +133,6 @@ request.onsuccess = async function(event) {
 
 
 async function enterAPerson(){
-    document.getElementById("cardList").innerHTML = '';
     let tx = db2.transaction("name");
     var count = await tx.objectStore("name").count();
     var personAdded = false;
@@ -149,23 +148,24 @@ async function enterAPerson(){
             }
             customerObjectStore.add(person);
             }
+            var transaction = db2.transaction("peopleDay").objectStore("peopleDay");
+            document.getElementById("cardList").innerHTML = '';
+            transaction.openCursor().onsuccess = function(event) {
+            var cursor = event.target.result;
+            if (cursor) {
+                addCard(cursor.value);
+                cursor.continue();
+            }
+            else {
+                console.log("No more entries!");
+            }
+            };
         }else{
             window.alert("You must add contacts before receiving a reminder!");
         }
     }
 
-    var transaction = db2.transaction("peopleDay").objectStore("peopleDay");
-
-    transaction.openCursor().onsuccess = function(event) {
-    var cursor = event.target.result;
-    if (cursor) {
-        addCard(cursor.value);
-        cursor.continue();
-    }
-    else {
-        console.log("No more entries!");
-    }
-    };
+    
 }    
 
 request.onupgradeneeded = function(event) { 
