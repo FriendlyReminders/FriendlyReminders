@@ -71,7 +71,6 @@ request.onsuccess = async function(event) {
     var sameDate = false;
     var addedPerson = false;
     var transaction = db2.transaction("dateAccessed").objectStore("dateAccessed");
-    customerObjectStore.add(date);
     transaction.openCursor().onsuccess = async function(event) {
         var cursor = event.target.result;
         if (cursor) {
@@ -132,7 +131,32 @@ request.onsuccess = async function(event) {
 }
 
 
-function enterAPerson(){
+async function enterAPerson(){
+    let tx = db2.transaction("name");
+    var count = await tx.objectStore("name").count();
+    var personAdded = false;
+    count.onsuccess = () => {
+        if(count.result>0){
+            var customerObjectStore = db2.transaction("peopleDay", "readwrite").objectStore("peopleDay");
+            var person = event.target.result;
+            customerObjectStore.add(person);
+        }else{
+            window.alert("You must add contacts before receiving a reminder!");
+        }
+    }
+
+    var transaction = db2.transaction("peopleDay").objectStore("peopleDay");
+
+    transaction.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+        addCard(cursor.value);
+        cursor.continue();
+    }
+    else {
+        console.log("No more entries!");
+    }
+    };
 }    
 
 request.onupgradeneeded = function(event) { 
@@ -151,7 +175,7 @@ request.onupgradeneeded = function(event) {
         var d = new Date();
         var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
         var date = {
-        year:d.getFullYear(),month:d.getMonth(),day:d.getDate()-1
+        year:0,month:0,day:0
         }
         customerObjectStore.add(date);
     };
