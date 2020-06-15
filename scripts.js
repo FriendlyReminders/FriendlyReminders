@@ -56,6 +56,7 @@ request.onerror = function(event) {
 };
 
 request.onsuccess = async function(event) {
+    document.getElementById("cardList").innerHTML = '';
     db2 = event.target.result;
     
     // var customerObjectStore = db2.transaction("name", "readwrite").objectStore("name");
@@ -132,6 +133,7 @@ request.onsuccess = async function(event) {
 
 
 async function enterAPerson(){
+    document.getElementById("cardList").innerHTML = '';
     let tx = db2.transaction("name");
     var count = await tx.objectStore("name").count();
     var personAdded = false;
@@ -142,7 +144,9 @@ async function enterAPerson(){
             db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
 
             var customerObjectStore = db2.transaction("peopleDay", "readwrite").objectStore("peopleDay");
-            var person = event.target.result;
+            var person = {
+                name:event.target.result.name,tel:event.target.result.tel,contactNumber:event.target.result.contactNumber,personNumber:event.target.result.personNumber,contactDate:event.target.result.contactDate
+            }
             customerObjectStore.add(person);
             }
         }else{
