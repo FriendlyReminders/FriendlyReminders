@@ -91,19 +91,24 @@ request.onsuccess = async function(event) {
     }
     window.alert(sameDate);
     if(!sameDate){
-        var count = db2.transaction("name").objectStore("name").count();
-        window.alert(count);
-        if(count>0){
-            var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
-            var date = {
-                year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
+        let tx = db2.transaction("name");
+        var count = await tx.objectStore("name").count();
+        count.onsuccess = () => {
+            console.log(count);
+            alert(count.result);
+            if(count.result>0){
+                var customerObjectStore = db2.transaction("dateAccessed", "readwrite").objectStore("dateAccessed");
+                var date = {
+                    year:d.getFullYear(),month:d.getMonth(),day:d.getDay()
+                }
+                customerObjectStore.add(date);
+                var index = Math.floor(Math.random()*count.result);
+                window.alert(index);
+                db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
+                    addCard(event.target.result);
+                };
             }
-            customerObjectStore.add(date);
-            window.alert(index);
-            var index = Math.floor(Math.random()*count);
-            db2.transaction("name").objectStore("name").get(index).onsuccess = function(event) {
-                addCard(event.target.result);
-            };
+
         }
         
     }
@@ -132,8 +137,12 @@ request.onupgradeneeded = function(event) {
 
 
 function addCard(contact){
+    var a = document.createElement('a');
+    a.href = "/person?name="+contact.name+"&tel="+contact.tel;
+    document.getElementById("cardList").appendChild(a);
+
     var div = document.createElement('div');
-    document.getElementById("cardList").appendChild(div);
+    a.appendChild(div);
 
     div.className = "friendCard";
     var img = document.createElement('img');
@@ -149,7 +158,7 @@ function addCard(contact){
 
     var h2 = document.createElement('h2');
     div2.appendChild(h2);
-    h2.innerHTML="Talk to "+contact;
+    h2.innerHTML="Talk to " +contact.name;
     div2.appendChild(h2);
     div.appendChild(img);
 }
